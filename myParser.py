@@ -17,5 +17,3 @@ if __name__ == "__main__":
     else:
         print("an error occured with fileName = " + mp.fileName)
     
-
-
