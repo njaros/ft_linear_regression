@@ -23,7 +23,7 @@ def gradientLC(theta0: float, theta1: float, data) -> float:
 	"""gradient of the leading coefficient theta1
 
 		this function return the direction of the slope of the deritative of the curve
-        of the quadCost as function of Theta1 for the given parameters theta0 and theta1
+        of the quadCost as function of theta1 for the given parameters theta0 and theta1
 	""" 
 	errorSum = 0
 	for (x, y) in data:
@@ -34,7 +34,7 @@ def gradientOrigin(theta0: float, theta1: float, data) -> float:
 	"""gradient of the origin theta0
 
 		this function return the direction of the slope of the deritative of the curve
-		of the quadCost as function of Theta0 for the given parameters theta0 and theta1
+		of the quadCost as function of theta0 for the given parameters theta0 and theta1
 	"""
 	errorSum = 0
 	for (x, y) in data:
@@ -51,4 +51,5 @@ def gradientDescent(theta0: float, theta1: float, learningRate: float, data) -> 
 	"""
 	newTheta0 = theta0 - (learningRate * gradientOrigin(theta0, theta1, data))
 	newTheta1 = theta1 - (learningRate * gradientLC(theta0, theta1, data))
+	print(newTheta0, newTheta1)
 	return (newTheta0, newTheta1)
