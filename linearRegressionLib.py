@@ -1,6 +1,24 @@
 
+def dataNormalization(data) -> tuple[int, int]:
+    """data normalization function
+	
+        given a dataset data with 2 columns, this function will divide all
+	    element in the first column by the max of this column. Same for the
+	    second column.
+	    Then it will return the x diviser and the y diviser.
+	"""
+    maxX: int = 0
+    maxY: int = 0
+    for (x, y) in data:
+        maxX = max(maxX, x)
+        maxY = max(maxY, y)
+    for elt in data:
+        elt[0] = elt[0] / maxX
+        elt[1] = elt[1] / maxY
+    print(data)
+    return (maxX, maxY)
 
-def estimatePrice(mileage: int, theta0: int, theta1: int) -> int:
+def estimatePrice(mileage: int, theta0: float, theta1: float) -> float:
 	"""estimatePrice function
 
 		given a mileage and 2 trained numbers theta0 and theta1,
@@ -41,7 +59,7 @@ def gradientOrigin(theta0: float, theta1: float, data) -> float:
 		errorSum += estimatePrice(x, theta0, theta1) - y
 	return errorSum / len(data)
 
-def gradientDescent(theta0: float, theta1: float, learningRate: float, data) -> (float, float):
+def gradientDescent(theta0: float, theta1: float, learningRate: float, data) -> tuple[float, float]:
 	"""Descent of gradient function
 	
 		given a theta0, theta1, learningRate and a dataset, this function will creates new parameters newTheta0 and newTheta1
@@ -51,5 +69,4 @@ def gradientDescent(theta0: float, theta1: float, learningRate: float, data) -> 
 	"""
 	newTheta0 = theta0 - (learningRate * gradientOrigin(theta0, theta1, data))
 	newTheta1 = theta1 - (learningRate * gradientLC(theta0, theta1, data))
-	print(newTheta0, newTheta1)
 	return (newTheta0, newTheta1)

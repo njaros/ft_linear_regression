@@ -4,9 +4,9 @@ class MyParser:
     def __init__(self, file: str):
         self.fileName = file
         self.content = []
-        with open(self.fileName, newline='') as io:
+        with open(self.fileName, 'r', newline='') as io:
             self.csvparsing = list(csv.reader(io))
-            self.content = [(int(x), int(y)) for (x, y) in self.csvparsing[1:]]
+            self.content = [[int(x), int(y)] for (x, y) in self.csvparsing[1:]]
             io.close()
 
 if __name__ == "__main__":
