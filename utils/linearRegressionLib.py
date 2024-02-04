@@ -25,23 +25,23 @@ def min_maxNormalization(data: list[list[float]]) -> tuple[tuple[float, float], 
         elt[1] = (elt[1] - minY) / (maxY - minY)
     return ((minX, maxX), (minY, maxY))
 
-def rescaleThetas(thetas: list[float], normScalars: tuple[tuple[float, float], tuple[float, float]]):
-    """rescale the theta0 and theta1 to exit the math format
-    
-		thetas : list containing theta0 and theta1
-		normScalars : the necessary set of number to rescale the thetas
-		given at the return of min_maxNormalization function
-    """
-    thetas[0] = (thetas[0] * (normScalars[0][1] - normScalars[0][0])) + normScalars[0][0]
-    thetas[1] = (thetas[1] * (normScalars[1][1] - normScalars[1][0])) + normScalars[1][0]
+def scaleX(mileage: float, norms) -> float:
+	"""create a scaled value from a mileage to have sense with scaled trained thetas values
 
-def rescaleX(dataX, norms):
-    for i in range(len(dataX)):
-        dataX[i] = (dataX[i] * (norms[0][1] - norms[0][0])) + norms[0][0]
+		mileage : a float
+		norms : the datas registered to normalize or denormalize
+	"""
+	scaledX = (mileage - norms[0][0]) / (norms[0][1] - norms[0][0])
+	return scaledX
         
-def rescaleY(dataY, norms):
-    for i in range(len(dataY)):
-        dataY[i] = (dataY[i] * (norms[1][1] - norms[1][0])) + norms[1][0]
+def rescaleY(scaledCost: float, norms) -> float:
+	"""rescale a result value from the linear regression formula to give a readable value to the user
+ 
+		scaledCost : a float
+		norms : the datas registered to normalize or denormalize
+	"""
+	readableCost = (scaledCost * (norms[1][1] - norms[1][0])) + norms[1][0]
+	return readableCost
 
 def estimatePrice(mileage: float, theta0: float, theta1: float) -> float:
 	"""estimatePrice function

@@ -3,9 +3,6 @@ from utils.myParser import MyParser
 import matplotlib.pyplot as plt
 import sys
 
-def f(x):
-    return 9000 - 0.022 * x
-
 def training():
     """training function
     
@@ -26,25 +23,25 @@ def training():
     axs[0].plot(listX, listY, "ob")
     normalisationScalars = []
     thetas = [0.0, 0.0]
-    i: int = 100
+    i: int = 10000
     print(data.content)
     normalisationScalars = min_maxNormalization(data.content)
     print(data.content)
     while i:
-        gradientDescent(thetas, 1.6, data.content)
+        gradientDescent(thetas, 1, data.content)
         i -= 1
-    #rescaleThetas(thetas, normalisationScalars)
-    print(f"{thetas=}")
     listX = []
     listY = []
     for (x, y) in data.content:
         listX.append(x)
         listY.append(y)
-    #rescaleX(listX, normalisationScalars)
-    #rescaleY(listY, normalisationScalars)
-    axs[0].plot([f(x) for x in range(250000)])
     axs[1].plot(listX, listY, "ob")
-    axs[1].plot([estimatePrice(x, thetas[0], thetas[1]) for x in range(0, 2)])
+    axs[1].plot([estimatePrice(x, thetas[0], thetas[1]) for x in range(2)])
+    with open("thetas_scale_values.conf", 'w') as io:
+        io.write(f"theta0 = {thetas[0]}\ntheta1 = {thetas[1]}\n")
+        io.write(f"minX = {normalisationScalars[0][0]}\nmaxX = {normalisationScalars[0][1]}\n")
+        io.write(f"minY = {normalisationScalars[1][0]}\nmaxY = {normalisationScalars[1][1]}")        
+        io.close()
     plt.show()
     
 if __name__ == "__main__":
