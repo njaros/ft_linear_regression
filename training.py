@@ -1,4 +1,4 @@
-from utils.linearRegressionLib import *
+from utils.linearRegressionLib import min_maxNormalization, estimatePrice, quadCost, gradientDescent
 from utils.myFileManager import MyCSVParser
 import json
 import matplotlib.pyplot as plt
