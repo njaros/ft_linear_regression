@@ -57,15 +57,31 @@ def training(dataSet, learningRate, iterations):
     plt.show()
 
 if __name__ == "__main__":
-    learningRate = 1
-    iterations = 100
+    ac = len(sys.argv)
+    if ac == 1:
+        print("need a csv file as first argument\nexit")
+        exit()
     try:
         csvData = MyCSVParser(sys.argv[1]).content
     except:
-        print("wrong file input")
+        print("wrong file input\nexit")
         exit()
-    try:
-        learningRate = float(sys.argv[2])
-        iterations = int(sys.argv[3])
-    finally:
-        training(csvData, learningRate, iterations)
+    if ac > 2:
+        try:
+            learningRate = float(sys.argv[2])
+        except:
+            print("couldn't cast the learningRate entry as a float, value set to 1")
+            learningRate = 1
+    else:
+        print("no entry for learningRate, value set to 1")
+        learningRate = 1
+    if ac > 3:
+        try:
+            iterations = int(sys.argv[3])
+        except:
+            print("couldn't cast the iterations entry as an int, value set to 100")
+            iterations = 100
+    else:
+        print("no entry for iterations, value set to 100")
+        iterations = 100
+    training(csvData, learningRate, iterations)
