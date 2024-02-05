@@ -1,6 +1,7 @@
 import csv
+import json
 
-class MyParser:
+class MyCSVParser:
     def __init__(self, file: str):
         self.fileName: str = file
         self.content: list[list[float]]
@@ -11,7 +12,7 @@ class MyParser:
 
 if __name__ == "__main__":
     import sys
-    mp = MyParser(str(sys.argv[1]))
+    mp = MyCSVParser(str(sys.argv[1]))
     if (mp.content):
         print(mp.content)
     else:

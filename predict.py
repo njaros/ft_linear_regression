@@ -1,20 +1,14 @@
 from utils.linearRegressionLib import scaleX, rescaleY, estimatePrice
 import sys
+import json
 
 def predict(inputFile: str):
-	norms: list[list[float]] = [[0.0, 0.0], [0.0, 0.0]]
-	theta0: float
-	theta1: float
 	with open(inputFile, 'r') as io:
-		strs = io.readlines()
+		jsonData: dict = json.load(io)
 		io.close()
-	theta0 = float(strs[0][9:])
-	theta1 = float(strs[1][9:])
-	norms[0][0] = float(strs[2][7:])
-	norms[0][1] = float(strs[3][7:])
-	norms[1][0] = float(strs[4][7:])
-	norms[1][1] = float(strs[5][7:])
-	print(theta0, '\n', theta1, '\n', norms)
+	theta0 = jsonData.get("theta0")
+	theta1 = jsonData.get("theta1")
+	norms = jsonData.get("min_max_norms")
 	while True:
 		try:
 			valRead = float(input("Enter a mileage : "))
