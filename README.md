@@ -15,7 +15,7 @@ The linear regression line is able to predict a value y form an x consistent wit
 		- python3 training.py data.csv 0.5 1000
 		- python3 training.py data.csv
 
-	The program will show some curves and create a file "thetas_scalse_values.json"  
+	The program will show some curves and create a file "thetas_scale_values.json"  
 	You can do it with different learningRate and iterations values until the curves seems good.  
   
 # Step2:
