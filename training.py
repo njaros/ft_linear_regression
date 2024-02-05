@@ -52,7 +52,7 @@ def training(dataSet, learningRate, iterations):
                    "min_max_norms": normalisationScalars},
                   io, indent = 4)
         io.close()
-    axs[0, 2].legend()
+    axs[1, 2].legend()
     plt.show()
 
 if __name__ == "__main__":
