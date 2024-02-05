@@ -27,7 +27,7 @@ share/python-wheels/
 MANIFEST
 .vs
 .vscode
-theta_scale_values.json
+thetas_scale_values.json
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
