@@ -23,6 +23,8 @@ The linear regression line is able to predict a value y form an x consistent wit
 	python3 predict.py thetas_scale_values.json
 
 ![image](https://github.com/jajalecapouet/ft_linear_regression/assets/90960943/13db7725-4bf6-4339-8fea-c240117952bb)
+![image](https://github.com/jajalecapouet/ft_linear_regression/assets/90960943/f6be2ce5-b0c8-42db-a945-051db681c286)
+
 
 ### DOC
 
