@@ -36,8 +36,9 @@ def training(dataSet, learningRate, iterations):
     axs[0, 2].plot([estimatePrice(x, thetas[0], thetas[1]) for x in range(2)])
     
     for i in range(iterations):
-        axs[1, 0].plot(thetas[0], quadCost(thetas[0], thetas[1], dataSet), "ob")
-        axs[1, 1].plot(thetas[1], quadCost(thetas[0], thetas[1], dataSet), "ob")
+        quadCostVal = quadCost(thetas[0], thetas[1], dataSet)
+        axs[1, 0].plot(thetas[0], quadCostVal, "ob")
+        axs[1, 1].plot(thetas[1], quadCostVal, "ob")
         gradientDescent(thetas, learningRate, dataSet)
         axs[0, 2].plot([estimatePrice(x, thetas[0], thetas[1]) for x in range(2)])
         thetasCurve.append(tuple(thetas))
