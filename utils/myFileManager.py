@@ -1,13 +1,14 @@
 import csv
-import json
 
 class MyCSVParser:
     def __init__(self, file: str):
         self.fileName: str = file
-        self.content: list[list[float]]
+        self.content: list[list[float]] = [[], []]
         with open(self.fileName, 'r', newline='') as io:
             self.csvparsing = list(csv.reader(io))
-            self.content = [[float(x), float(y)] for (x, y) in self.csvparsing[1:]]
+            for (x, y) in self.csvparsing[1:]:
+                self.content[0].append(float(x))
+                self.content[1].append(float(y))
             io.close()
 
 if __name__ == "__main__":
@@ -17,4 +18,3 @@ if __name__ == "__main__":
         print(mp.content)
     else:
         print("an error occured with fileName = " + mp.fileName)
-    

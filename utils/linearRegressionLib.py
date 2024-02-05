@@ -12,17 +12,18 @@ def min_maxNormalization(data: list[list[float]]) -> tuple[tuple[float, float], 
 	"""
     maxX: float = data[0][0]
     minX: float = data[0][0]
-    maxY: float = data[0][1]
-    minY: float = data[0][1]
+    maxY: float = data[1][0]
+    minY: float = data[1][0]
     
-    for (x, y) in data:
-        maxX = max(maxX, x)
-        maxY = max(maxY, y)
+    for x in data[0]:
         minX = min(minX, x)
+        maxX = max(maxX, x)
+    for y in data[1]:
         minY = min(minY, y)
-    for elt in data:
-        elt[0] = (elt[0] - minX) / (maxX - minX)
-        elt[1] = (elt[1] - minY) / (maxY - minY)
+        maxY = max(maxY, y)
+    for i in range(len(data[0])):
+        data[0][i] = (data[0][i] - minX) / (maxX - minX)
+        data[1][i] = (data[1][i] - minY) / (maxY - minY)
     return ((minX, maxX), (minY, maxY))
 
 def scaleX(mileage: float, norms) -> float:
@@ -62,9 +63,9 @@ def quadCost(theta0: float, theta1: float, data: list[list[float]]) -> float:
                     = O(n) where n = length of dataset
     """
     quadErrorSum = 0
-    for (x, y) in data:
-        quadErrorSum += (estimatePrice(x, theta0, theta1) - y)**2
-    return quadErrorSum / (2 * len(data))
+    for i in range(len(data[0])):
+        quadErrorSum += (estimatePrice(data[0][i], theta0, theta1) - data[1][i])**2
+    return quadErrorSum / (2 * len(data[0]))
 
 def gradientLC(theta0: float, theta1: float, data: list[list[float]]) -> float:
 	"""gradient of the leading coefficient theta1
@@ -74,9 +75,9 @@ def gradientLC(theta0: float, theta1: float, data: list[list[float]]) -> float:
         Complexity = O(n) where n = length of dataset
 	""" 
 	errorSum = 0
-	for (x, y) in data:
-		errorSum += (estimatePrice(x, theta0, theta1) - y) * x
-	return errorSum / len(data)
+	for i in range(len(data[0])):
+		errorSum += (estimatePrice(data[0][i], theta0, theta1) - data[1][i]) * data[0][i]
+	return errorSum / len(data[0])
 
 def gradientOrigin(theta0: float, theta1: float, data: list[list[float]]) -> float:
 	"""gradient of the origin theta0
@@ -86,9 +87,9 @@ def gradientOrigin(theta0: float, theta1: float, data: list[list[float]]) -> flo
         Complexity = O(n) where n = length of dataset
 	"""
 	errorSum = 0
-	for (x, y) in data:
-		errorSum += estimatePrice(x, theta0, theta1) - y
-	return errorSum / len(data)
+	for i in range(len(data[0])):
+		errorSum += estimatePrice(data[0][i], theta0, theta1) - data[1][i]
+	return errorSum / len(data[0])
 
 def gradientDescent(thetas: list[float], learningRate: float, data: list[list[float]]):
 	"""Descent of gradient function
